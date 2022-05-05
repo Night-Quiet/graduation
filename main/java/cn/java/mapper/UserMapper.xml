@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.java.mapper.UserMapper">
+
+	<!--查询是否有这个用户-->
+	<select id="haveUser" resultType="map" parameterType="Map">
+		SELECT count(*) num FROM user WHERE username=#{username} AND password=#{password} AND id_identify=#{id_identify} AND id_class=#{id_class}
+	</select>
+
+	<!--注册插入用户数据-->
+	<insert id="addUser" parameterType="Map">
+		INSERT INTO user SET username=#{username},password=#{password},id_identify=#{id_identify},id_class=#{id_class}
+	</insert>
+
+	<!--通过 账号 密码 班级Id 查询用户信息-->
+	<select id="getUserByMulCondition" resultType="Map" parameterType="Map">
+		SELECT * FROM user WHERE username=#{username} AND password=#{password} AND id_class=#{id_class} AND id_identify=#{id_identify}
+	</select>
+
+	<!--查询所有的学生 | 教师-->
+	<select id="getAllIdentify" resultType="Map" parameterType="Map">
+		SELECT * FROM user WHERE id_identify=#{id_identify}
+	</select>
+
+</mapper>
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.java.mapper.CommentMapper">
+    <!--依靠问题Id查询问题评论-->
+    <select id="getCommentById" resultType="Map" parameterType="Map">
+        SELECT * FROM comment WHERE id_question=#{id_question}
+    </select>
+
+    <!--添加问题评论-->
+    <insert id="addComment" parameterType="Map">
+        INSERT INTO comment SET id_question=#{id_question},identify=#{identify},id_user_main=#{id_user_main},user_main=#{user_main},user_main_comment=#{user_main_comment}
+    </insert>
+
+    <!--通过用户Id查询用户评论-->
+    <select id="getCommentByUser" resultType="Map" parameterType="Map">
+        SELECT * FROM comment WHERE id_user_main=#{id_user_main}
+    </select>
+
+    <!--根据评论Id更改问题评论-->
+    <update id="updateComment" parameterType="Map">
+        UPDATE comment SET user_main_comment=#{user_main_comment} WHERE id_comment=#{id_comment}
+    </update>
+</mapper>

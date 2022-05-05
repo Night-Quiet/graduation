@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.java.mapper.QuestionMapper">
+    <!--依靠 班级Id 查询班级问题集-->
+    <select id="getQuestionByClass" resultType="Map" parameterType="Map">
+        SELECT * FROM question WHERE id_class=#{id_class}
+    </select>
+
+    <!--依靠 学生Id 查询学生个人问题集-->
+    <select id="getQuestionByUser" resultType="Map" parameterType="Map">
+        SELECT * FROM question WHERE id_user=#{id_user}
+    </select>
+
+    <!--依靠 摘要 查询问题-->
+    <select id="getQuestionBySummary" resultType="Map" parameterType="Map">
+        SELECT * FROM question WHERE keyword=#{keyword}
+    </select>
+
+    <!--依靠 问题Id 查询问题-->
+    <select id="getQuestionById" resultType="Map" parameterType="Map">
+        SELECT * FROM question WHERE id_question=#{id_question}
+    </select>
+
+    <!--学生添加问题-->
+    <insert id="addQuestion" parameterType="Map">
+        INSERT INTO question SET id_class=#{id_class},id_user=#{id_user},keyword=#{keyword},datenow=#{datenow}
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <!--查询新插入问题的问题Id-->
+    <select id="getQuestionId" resultType="Long">
+        select max(id_question) from question;
+    </select>
+
+    <!--依靠 问题Id 删除问题-->
+    <delete id="deleteQuestion" parameterType="Map">
+        DELETE FROM question WHERE id_question=#{id_question}
+    </delete>
+
+
+
+</mapper>

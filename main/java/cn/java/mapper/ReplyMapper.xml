@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.java.mapper.ReplyMapper">
+    <!--依靠评论Id查询评论回复-->
+    <select id="getReplyById" resultType="Map" parameterType="Map">
+        SELECT * FROM reply WHERE id_comment=#{id_comment}
+    </select>
+
+    <!--添加评论回复-->
+    <insert id="addReply" parameterType="Map">
+        INSERT INTO reply SET id_comment=#{id_comment},identify=#{identify},id_user_other=#{id_user_other},user_other=#{user_other},user_other_reply=#{user_other_reply}
+    </insert>
+
+    <!--通过用户Id查询用户回复-->
+    <select id="getReplyByUser" resultType="Map" parameterType="Map">
+        SELECT * FROM reply WHERE id_user_other=#{id_user_other}
+    </select>
+
+    <!--根据回复Id更改问题回复-->
+    <update id="updateReply" parameterType="Map">
+        UPDATE reply SET user_other_reply=#{user_other_reply} WHERE id_reply=#{id_reply}
+    </update>
+</mapper>

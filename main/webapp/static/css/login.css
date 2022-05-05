@@ -1,0 +1,155 @@
+/*------------------------------------*\
+    $CSS开始
+\*------------------------------------*/
+/**
+ * CSS开始..............文件起始
+ * 大结构...............全局变量设置
+ * 控制区.................控制登录、注册转换CSS设置
+ * 内容区.................登录、注册框架设置
+ * 样式修补区..............修改自动填充时候背景颜色的变换
+ */
+
+/*------------------------------------*\
+    $大结构
+\*------------------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+
+    background: url(../images/01.jpg) no-repeat fixed;
+    background-size: 100% 100%;
+}
+
+p {
+    margin: 30px 0px 6px 0px;
+
+    font-size: 15px;
+
+    color: aliceblue;
+}
+
+/*------------------------------------*\
+    $控制区
+\*------------------------------------*/
+.control {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    border-radius: 5px;
+    width: 440px;
+
+    background-color: black;
+
+    opacity: 0.7;
+}
+
+.item {
+    border-radius: 5px;
+    width: 440px;
+    height: 60px;
+
+    background-color: black;
+}
+    .item div {
+        display: inline-block;
+
+        border-radius: 5px;
+        width: 220px;
+        height: 70px;
+
+        font-size: 15px;
+        line-height: 60px;
+        text-align: center;
+
+        color: aliceblue;
+
+        cursor: pointer;
+    }
+        .item div:hover { background-color: rgba(105,105,105, 0.2); }
+
+.active {
+    background-color: rgba(105,105,105, 0.4);
+    cursor: default !important;
+}
+    .active:hover{ background-color: rgba(105,105,105, 0.4) !important; }
+
+/*------------------------------------*\
+    $内容区
+\*------------------------------------*/
+.content{ width: 100%; }
+    .content input[type="text"],
+    .content input[type="password"],
+    .content select{
+        box-sizing: border-box;
+
+        border: 1px solid #7D7D7D;
+        border-radius: 3px;
+        padding: 0 10px;
+        width: 100%;
+        height: 40px;
+
+        background-color: black;
+        color: aliceblue;
+    }
+    .content input[type="submit"]{
+        margin: 40px 0px;
+        border: 1px solid #7D7D7D;
+        border-radius: 5px;
+        width: 100%;
+        height: 50px;
+
+        letter-spacing: 4px;
+
+        background-color: black;
+        color: white;
+
+        cursor: pointer;
+    }
+        .content input[type="submit"]:hover{
+            background-color: rgba(105,105,105, 0.1);
+        }
+    .content option {
+        font-size: 15px;
+
+         background-color: black;
+         color: aliceblue;
+     }
+
+.login {
+    display: block;
+
+    margin: 20px 30px;
+
+    text-align: left;
+}
+
+.register{
+    display: none;
+
+    margin: 20px 30px;
+
+    text-align: left;
+}
+
+.message {
+    color: red;
+}
+
+/*------------------------------------*\
+    $样式修改区
+\*------------------------------------*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition-delay: 99999s; /*延长自动填充颜色时间*/
+    -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+}
+
+

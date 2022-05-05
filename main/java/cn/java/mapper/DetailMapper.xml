@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.java.mapper.DetailMapper">
+    <!--依靠id_question查询单个问题详情-->
+    <select id="getDetailById" resultType="Map" parameterType="Map">
+        SELECT * FROM detail WHERE id_question=#{id_question}
+    </select>
+
+    <!--学生添加问题-->
+    <insert id="addDetail" parameterType="Map">
+        INSERT INTO detail SET id_question=#{id_question},question=#{question},answer=#{answer},q_pic1=#{q_pic1},q_pic2=#{q_pic2},q_pic3=#{q_pic3},a_pic1=#{a_pic1},a_pic2=#{a_pic2},a_pic3=#{a_pic3},a_video=#{a_video}
+    </insert>
+
+    <!--更新问题-->
+    <update id="updateDetail" parameterType="Map">
+        UPDATE detail SET answer=#{answer},a_pic1=#{a_pic1},a_pic2=#{a_pic2},a_pic3=#{a_pic3},a_video=#{a_video} WHERE id_question=#{id_question}
+    </update>
+</mapper>

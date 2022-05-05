@@ -1,0 +1,125 @@
+/*------------------------------------*\
+    $CSS开始
+\*------------------------------------*/
+/**
+ * CSS开始..............文件起始
+ * 大结构...............全局变量设置
+ * 左边.................整个界面的左边设置
+ * 右边.................整个界面的右边设置
+ * 样式修改区...........修改自动填充时候背景颜色的变换
+ */
+
+/*------------------------------------*\
+    $大结构
+\*------------------------------------*/
+*{
+    box-sizing: border-box;
+}
+
+html{
+    width: 100%;
+    height: 100%;
+
+}
+
+body{
+    margin: 0px 0px;
+    width: 100%;
+    height: 100%;
+
+    background: aliceblue url("../images/01.jpg") no-repeat fixed;
+    background-size: 100% 100%;
+}
+p{
+    margin: 0px 0px;
+    padding: 0px 0px;
+
+    font-size: 15px;
+
+    color: aliceblue;
+}
+form{
+    margin: 0px;
+
+    color: rgba(24, 144, 255, 0.15);
+
+    color: aliceblue;
+}
+.home {
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: black;
+
+    opacity: 0.9;
+}
+
+/*------------------------------------*\
+    $右边
+\*------------------------------------*/
+
+.home-main {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+
+    background-color: black;
+}
+
+.table-question {
+    overflow: auto;
+
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(16,16,20,1);
+
+}
+
+.detail-all > table {
+    border-top: 0px solid #000000;
+    border-bottom: 1px solid #828282;
+    border-radius: 5px;
+    padding: 10px 20px;
+    width: 100%;
+}
+.detail-all:link,
+.detail-all:visited {
+    text-decoration: none;
+
+    color: aliceblue;
+}
+.detail-all > table:hover,
+.detail-all > table:active{ background-color:rgba(24, 144, 255, 0.15); }
+
+.detail-all p {
+    color: aqua;
+}
+
+.detail-1{ width: 20%; }
+.detail-2{ width: 60%; }
+.detail-3{ width: 20%; }
+
+::-webkit-scrollbar{
+    width:10px;
+    height:10px;
+}
+::-webkit-scrollbar-track{
+    border-radius:2px;
+
+    background-color: black;
+}
+::-webkit-scrollbar-thumb{
+    border-radius:10px;
+
+    background-color: rgba(71,71,145,0.5);
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #333;
+}
+::-webkit-scrollbar-corner{
+    background: #179a16;
+}

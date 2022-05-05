@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.java.mapper.StatisticsMapper">
+    <!--查询用户是否浏览过-->
+    <select id="haveView" resultType="map" parameterType="Map">
+        SELECT count(*) num FROM statistics WHERE id_user=#{id_user} AND id_question=#{id_question}
+    </select>
+
+    <!--插入浏览数据-->
+    <insert id="addStatistics" parameterType="Map">
+        INSERT INTO statistics SET id_user=#{id_user},id_question=#{id_question},identify=#{identify}
+    </insert>
+
+    <!--更新是否评论-->
+    <update id="updateIsComment" parameterType="Map">
+        UPDATE statistics SET is_comment=#{is_comment} WHERE id_user=#{id_user} AND id_question=#{id_question}
+    </update>
+
+    <!--更新是否回复-->
+    <update id="updateIsReply" parameterType="Map">
+        UPDATE statistics SET is_reply=#{is_reply} WHERE id_user=#{id_user} AND id_question=#{id_question}
+    </update>
+
+    <!--通过学生id查询个人浏览记录-->
+    <select id="getStatisticsByUser" resultType="Map" parameterType="Map">
+        SELECT * FROM statistics WHERE id_user=#{id_user}
+    </select>
+
+    <!--通过问题id | 身份 查询问题访问记录-->
+    <select id="getStatisticsByQuestion" resultType="Map" parameterType="Map">
+        SELECT * FROM statistics WHERE id_question=#{id_question} identify=#{identify}
+    </select>
+</mapper>

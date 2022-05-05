@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--
+    注释：
+    bean：将一个类的对象创建过程交给spring容器
+    class：指定类的具体路径
+    id：唯一标识符
+    -->
+
+
+    <!--1.spring框架：扫描包-->
+    <context:component-scan base-package="cn.java.*"/>
+
+    <!--2.加载jdbc.properties文件 加载属性配置文件-->
+    <context:property-placeholder location="classpath:database.properties"/>
+
+    <!--3.配置德鲁伊数据源,将mybatis中的数据源配置信息移到这里-->
+    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
+    </bean>
+
+    <!--4.配置MyBatis的sqlSession工厂 ,让Spring框架管理mybatis中的Session对象-->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定该 session对象使用数据源ds的信息去访问数据库 -->
+        <property name="dataSource" ref="ds"/>
+        <!--指定session对象去读取该路径下的Mapper的映射文件-->
+        <property name="mapperLocations" value="classpath:cn/java/mapper/*.xml"/>
+        <!--指定实体类的别名-->
+        <property name="typeAliasesPackage" value="cn.java.bean"/>
+    </bean>
+
+    <!--5.配置MyBatis的Mapper接口层，自动让Spring框架Mapper层的接口生成对象 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.java.mapper"/>
+    </bean>
+
+    <!--6.配置事务管理  事务：要么全部成功，要么全部失败！ 原子性、一致性、隔离性、持久性-->
+    <!--配置MyBatis的事务平台管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--注入数据源-->
+        <property name="dataSource" ref="ds"/>
+    </bean>
+
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.java.mapper.UserMapper"/>
+        <property name="sqlSessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="questionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.java.mapper.QuestionMapper"/>
+        <property name="sqlSessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="detailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.java.mapper.DetailMapper"/>
+        <property name="sqlSessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="commentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.java.mapper.CommentMapper"/>
+        <property name="sqlSessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="replyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.java.mapper.ReplyMapper"/>
+        <property name="sqlSessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="statisticsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.java.mapper.StatisticsMapper"/>
+        <property name="sqlSessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!--开启注解管理事务  注解配置声明式事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+</beans>
